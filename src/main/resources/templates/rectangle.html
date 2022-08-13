@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/rectangle.css}">
+    <title>Display of database info</title>
+</head>
+
+<body>
+    <div
+        th:style="'margin: auto; width:' + ${width} + 'px;height:' + ${height} + 'px;border:' + ${borderWidth} + 'px solid ' + ${borderColor} + '; background: ' + ${color} + ''">
+    <p th:text="${name}"></p>
+    </div>
+
+        <!---variable binded to rectangle.java-->
+        <table>
+            <tr>
+                <td>Name</td>
+                <td th:text="${name}"></td> <!--rectangle.java-->
+            </tr>
+            <tr>
+                <td>Width</td>
+                <td th:text="${width}"></td> <!--rectangle.java-->
+            </tr> 
+            <tr>
+                <td>Height</td>
+                <td th:text="${height}"></td> <!--rectangle.java-->
+            </tr>
+            <tr>
+                <td>Color</td>
+                <td th:text="${color}"></td> <!--rectangle.java-->
+            </tr>
+            <tr>
+                <td>Border Width</td>
+                <td th:text="${borderWidth}"></td> <!--rectangle.java-->
+            </tr>
+            <tr>
+                <td>Border Color</td>
+                <td th:text="${borderColor}"></td> <!--rectangle.java-->
+            </tr>    
+        </table>
+
+        <!--button type="submit" class="btn" name="action" value="cancel">Previous Page</button>
+!--->        
+</body>
+
+</html>

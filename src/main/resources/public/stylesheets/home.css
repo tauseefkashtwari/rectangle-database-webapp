@@ -1,0 +1,5 @@
+/*this is check the button color*/
+* {
+    border-collapse: collapse; /*no border*/
+    background-color: #cbf0f5;
+}

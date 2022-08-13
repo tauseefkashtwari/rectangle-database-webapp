@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/home.css}">
+    <title>Home</title>
+</head>
+
+<!---
+URLS REFERENCED: 
+1. https://stackoverflow.com/questions/40865564/why-command-dt-gives-no-relations-found
+2. MAP STRING OBJECTS - https://stackoverflow.com/questions/6870973/want-to-create-a-mapstring-object-object-can-be-string-and-can-be-class-obj
+3. JAVA DATA TYPES - https://www.w3schools.com/java/java_data_types.asp
+4. JARFILE ERROR - https://stackoverflow.com/questions/11943948/what-causes-unable-to-access-jarfile-error
+5. SQL POSTGRES DOCUMENTATION TO HELP WITH QUERIES - https://www.postgresql.org/docs/13/reference.html
+    - SQL ERRORS: https://techdocs.broadcom.com/us/en/ca-mainframe-software/database-management/ca-datacom/15-1/using/using-sql/sql-error-handling/sql-return-codes-117-and-118.html
+    - https://dba.stackexchange.com/questions/153151/syntax-error-at-or-near-insert
+    - https://www.w3schools.com/sql/sql_ref_primary_key.asp
+    - https://www.mysqltutorial.org/mysql-create-table/
+    - http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html
+
+6. Model add and themeleaf <th> tag - https://stackoverflow.com/questions/53507056/thymeleaf-theach-repair
+7. Iteration themeleaf - https://www.baeldung.com/thymeleaf-iteration
+8. ResultSet errors 
+    - https://coderanch.com/t/676054/databases/postgresql-error-column-userName-ResultSet
+    - https://stackoverflow.com/questions/29398171/java-resultset-column-column-name-not-found
+    - https://kodejava.org/how-do-i-retrieve-values-from-resultset/
+9. Method e.g. getinteger
+    - https://stackoverflow.com/questions/29398171/java-resultset-column-column-name-not-found
+    - https://www.javatpoint.com/java-integer-getinteger-method
+10. Adding to arraylist
+- https://www.geeksforgeeks.org/java-util-arraylist-add-method-java/
+11. GET and POST request errors debugging 
+https://www.programmersought.com/article/7014318863/
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/HttpRequestMethodNotSupportedException.html
+12. html LINKS, forms and labels
+- https://www.w3schools.com/html/html_links.asp
+- https://www.w3schools.com/html/html_forms.asp
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label
+13. CSS STYLING
+- https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
+- https://www.w3schools.com/css/css_text.asp
+- https://www.w3schools.com/cssref/pr_border-collapse.asp 
+- https://stackoverflow.com/questions/21376788/how-to-display-3-buttons-on-the-same-line-in-css/21376901 and https://www.w3schools.com/css/css3_buttons.asp (buttons)
+14. JAVASCRIPT GETELEMENTSmethod and error check isnan
+- https://www.w3schools.com/jsref/met_element_getelementsbyclassname.asp
+- https://www.w3schools.com/jsref/jsref_isnan.asp
+15. Requestparameters
+- https://www.baeldung.com/spring-request-param
+
+-->
+
+<body>
+    <form id="theForm" action="#" method="post" th:action="@{/rectangle}" th:object="${rectangle}">
+
+        <h3>These are the following rectangles the database</h3>
+        <p>Click on the name to view more information about the rectangle</p>
+        <p>To delete, please click on the Delete link</p>
+        <table>
+            <tr>
+                <td></td>
+                <td>Rectangle Name</td>
+                <td>Rectangle Color</td>
+            </tr>
+
+            <!-- iterate over ids-->
+            <tr th:each="id,iter : ${ids}">
+                <td th:text="${id}"> 
+                </td>
+                <td>
+                    <a th:text="${names[iter.index]}" th:href="@{/rectangle(id=${id})}"></a>
+                </td>
+                </td>
+
+                <!-- grab the colour of the next id-->
+                <td th:text="${colors[iter.index]}">
+
+                </td>
+                <td>
+                    <a th:text="Delete"  th:href="@{/delete(id=${id})}"></a>
+                </td>
+
+            </tr>
+        </table>
+
+    </form>
+</body>
+
+<div id="buttons">
+    <form action="#" th:action="@{/add}" th:method="get">
+        <input type="submit" class="btn" value="Add a rectangle"> <!---this is main page-->
+        </input>
+    </form>
+</div>
+
+</html>

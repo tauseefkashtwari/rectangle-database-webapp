@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/add.css}">
+    <title>Add</title>
+</head>
+
+<body>
+    <!---send object in post request to path/add-->
+    <form id="form1" action="#" method="post" th:action="@{/add}" th:object="${rectangle}">
+        <div class="addLabels">
+            <!--- add labels and th:field to bind to the ajva attributes-->
+            <label>Name</label>
+            <input type="text" class="inputs" th:field=*{name} placeholder="Name">
+
+            <label>Color</label>
+            <input type="text" class="inputs" th:field=*{color} placeholder="Color"> 
+
+            <label>Rectangle Width</label>
+            <input type="text" class="inputs" th:field=*{width} placeholder="Width">
+
+            <label>Rectangle Height</label>
+            <input type="text" class="inputs" th:field=*{height} placeholder="Height">
+
+            <label>Width border</label>
+            <input type="text" class="inputs" th:field=*{borderWidth} placeholder="Border Width">
+
+            <label>Color of border</label>
+            <input type="text" class="inputs" th:field=*{borderColor} placeholder="Border Color">
+        </div>
+
+        <button type="button" class="btn" name="action" onclick="validate()">Submit</button>
+        <!--the back button allows us to go home and have a look-->
+        <button type="submit" class="btn" name="action" value="cancel">Previous Page</button> 
+    </form>
+
+    <p style="color: red;" id="warning"></p>
+</body>
+
+<script th:inline="javascript">
+
+
+    function validate() {
+        var inputs = document.getElementsByClassName("inputs");
+        var warningMessage = "";
+
+        var inputLabels = ['Name', 'Color', 'Width', 'Height', 'Border Width', 'Border Color'];
+
+        for (var c = 0; c < inputs.length; c++) {
+            if (c == 2 || c == 3 || c == 4) {
+                if (inputs[c].value < 0 || isNaN(inputs[c].value)) {
+                    warningMessage += inputLabels[c] + " should be a non-negative number <br>";
+                }
+
+            } else if (c == 6) {
+                if (isNaN(inputs[c].value) || inputs[c].value < 1 || inputs[c].value > 10) {
+                    warningMessage += "There are only 10 guinea pigs <br>"
+                }
+            } else if (c == 0) {
+                if (inputs[c].value.length <= 0) {
+                    warningMessage += "Enter name <br>";
+                }
+            }
+            else {
+                if (inputs[c].value.length > 20) {
+                    warningMessage += inputLabels[c] + " is too long <br>";
+                }
+            }
+        }
+
+        document.getElementById("warning").innerHTML = warningMessage;
+
+        if (warningMessage.length == 0) {
+            document.getElementById("form1").submit();
+        }
+        console.log("Clicked");
+
+
+    }
+
+</script>
+
+</html>
